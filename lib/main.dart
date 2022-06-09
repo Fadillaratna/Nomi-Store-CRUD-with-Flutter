@@ -8,6 +8,7 @@ import './adddata.dart';
 
 import 'package:flutter/material.dart';
 
+
 void main() {
   runApp(new MaterialApp(
     title: "CRUD APP",
@@ -23,11 +24,16 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   Future<List> getData() async {
-    var url = "http://localhost/PHP-REST-API/getdata.php";
+    var url = "http://localhost:8080/paket/";
 
     final response = await http.get(Uri.parse(url));
+    // final "[" + response.body + "]";
+    debugPrint(response.body);
     return json.decode(response.body);
+    
   }
+
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -93,9 +99,9 @@ class ItemList extends StatelessWidget {
               
               child: new ListTile(
                 // ignore: prefer_const_constructors
-                title: new Text(list[i]['item_name'], style: new TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
-                leading: Image.network(list[i]['item_image'], width: 50, height: 100,),
-                subtitle: new Text("${list[i]['item_code']} - ${list[i]['stock']} available", style: new TextStyle(fontSize: 14, fontWeight: FontWeight.w300)),
+                title: new Text(list[i]['nama_paket'], style: new TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
+                leading: Image.network("http://localhost:8080/image/paket/" + list[i]['image'], width: 50, height: 100,),
+                // subtitle: new Text("${list[i]['item_code']} - ${list[i]['stock']} available", style: new TextStyle(fontSize: 14, fontWeight: FontWeight.w300)),
               ),
             ),
           ),

@@ -14,8 +14,8 @@ class Detail extends StatefulWidget {
 
 class _DetailState extends State<Detail> {
   void deleteData() {
-    var url = "http://localhost/PHP-REST-API/deleteData.php";
-    http.post(Uri.parse(url), body: {'id': widget.list[widget.index]['id']});
+    var url = "http://localhost:8080/paket/${widget.list[widget.index]['id_paket']}" ;
+    http.delete(Uri.parse(url));
   }
 
   void confirm(BuildContext context) {
@@ -25,7 +25,7 @@ class _DetailState extends State<Detail> {
       // desc:
       //     "Are You sure want to delete '${widget.list[widget.index]['item_name']}?'",
       // title: "Delete",
-      content: Text( "Are You sure want to delete '${widget.list[widget.index]['item_name']}?'", style: new TextStyle(color: Colors.black, fontSize: 13), textAlign: TextAlign.center,),
+      content: Text( "Are You sure want to delete '${widget.list[widget.index]['nama_paket']}?'", style: new TextStyle(color: Colors.black, fontSize: 13), textAlign: TextAlign.center,),
       
       buttons: [
         DialogButton(
@@ -89,7 +89,7 @@ class _DetailState extends State<Detail> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-          title: new Text("${widget.list[widget.index]['item_name']}"),
+          title: new Text("${widget.list[widget.index]['nama_paket']}"),
           backgroundColor: Colors.indigo),
       body: new Container(
         // height: 500.0,
@@ -102,7 +102,7 @@ class _DetailState extends State<Detail> {
                 padding: const EdgeInsets.only(top: 30.0),
               ),
               new Image.network(
-                widget.list[widget.index]['item_image'],
+               "http://localhost:8080/image/paket/" + widget.list[widget.index]['image'],
                 width: 300,
                 height: 300,
                 alignment: Alignment.center,
@@ -111,18 +111,18 @@ class _DetailState extends State<Detail> {
                 padding: const EdgeInsets.only(top: 30.0),
               ),
               new Text(
-                "${widget.list[widget.index]['item_code']} - ${widget.list[widget.index]['stock']} available",
+                "${widget.list[widget.index]['jenis']} - ${widget.list[widget.index]['outlet']['id_outlet']} available",
                 style:
                     new TextStyle(fontSize: 12.0, fontWeight: FontWeight.w400),
               ),
               new Text(
-                widget.list[widget.index]['item_name'],
+                widget.list[widget.index]['nama_paket'],
                 style:
                     new TextStyle(fontSize: 20.0, fontWeight: FontWeight.w700),
                 textAlign: TextAlign.left,
               ),
               new Text(
-                "Rp ${widget.list[widget.index]['price']},-",
+                "Rp ${widget.list[widget.index]['harga']},-",
                 style:
                     new TextStyle(fontSize: 14.0, fontWeight: FontWeight.w500),
               ),
